@@ -54,12 +54,19 @@ const createCourse = async () => {
 /************* Fetch Data from Database ************* */
 
  async function getCourses(){
-   const courses=await Course.find()   
-   //.find() returns all the data from courses collection from database
-   console.log(courses)  //2.1
+   const courses=await Course.find({author:"Sachin K", name:"React JS"})  //.find() returns all the data from courses collection from database
+                              .limit(2) //limit() returns the specified no.of documents (rows) 
+                              .sort({name:1})  //Sorts the documents 1->Ascending  -1->Descending
+                              .select({name:1, isPublished:1}) //Returns only specified properties
+   
+   console.log(courses)  //2.1, 2.2, 2.3
 }
 
 getCourses();
+
+
+
+
 
 // const Joi = require('joi');
 // const genres = require('./routes/genres');
