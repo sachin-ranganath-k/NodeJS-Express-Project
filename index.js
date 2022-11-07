@@ -1,8 +1,15 @@
 const mongooseLib = require("mongoose");
+
+/***************** Database Connection **************** */
+
 mongooseLib
   .connect("mongodb://localhost/playground") //Returns Promise
   .then(() => console.log("Connected to MongoDB...!"))
   .catch((error) => console.log("Error while connecting", error));
+
+
+
+/****************** Insert data into database *************** */
 
 // Create schema (like table creation in MySql)
 //A Mongoose schema defines the structure of the document, default values, validators, etc
@@ -26,7 +33,7 @@ const Course = mongooseLib.model("Course", courseSchema);
 //model("Course") --> Course is a singular form of collection Courses
 
 //Now need to create instance of class (Object)
-const creareCourse = async () => {
+const createCourse = async () => {
   const course = new Course({
     name: "React JS",
     author: "Sachin K",
@@ -41,9 +48,18 @@ const creareCourse = async () => {
   console.log(result);
 };
   //Save the above data to database now
-creareCourse();
+//  createCourse();    //1.1
 
 
+/************* Fetch Data from Database ************* */
+
+ async function getCourses(){
+   const courses=await Course.find()   
+   //.find() returns all the data from courses collection from database
+   console.log(courses)  //2.1
+}
+
+getCourses();
 
 // const Joi = require('joi');
 // const genres = require('./routes/genres');
