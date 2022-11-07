@@ -26,17 +26,22 @@ const Course = mongooseLib.model("Course", courseSchema);
 //model("Course") --> Course is a singular form of collection Courses
 
 //Now need to create instance of class (Object)
-const course = new Course({
-  name: "Node JS",
-  author: "Ranganath K",
-  tags: ["backend", "Javascript"],
-  //Default value set for date. So no need to add date here
-  isPublished: true,
-});
+const creareCourse = async () => {
+  const course = new Course({
+    name: "React JS",
+    author: "Sachin K",
+    tags: ["frontend", "Javascript"],
+    //Default value set for date. So no need to add date here
+    isPublished: true,
+  });
+//We don't know when it saves to database. So make it as asynchronous operation 
+//(Returns Promise).
 
-
-
-
+  const result = await course.save();
+  console.log(result);
+};
+  //Save the above data to database now
+creareCourse();
 
 
 
